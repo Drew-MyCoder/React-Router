@@ -1,0 +1,152 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background-color: #FFF7ED;
+    font-family: "inter", sans-serif;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+  }
+  
+  body {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+header {
+    height: 110px;
+    display: flex;
+    align-items: center;
+    padding-block: 10px;
+}
+
+header .site-logo {
+    color: black;
+    margin-right: auto;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 25px;
+}
+
+header a {
+    text-decoration: none;
+    color: #4D4D4D;
+    font-weight: 600;
+    padding: 5px 20px;
+}
+
+header a:hover {
+    color: #161616;
+    text-decoration: underline;
+}
+
+nav {
+    text-decoration: none;
+    height: 111.6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FFF7ED;
+    border: whitesmoke;
+  }
+
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn {
+    width: 250px;
+    height: 50px;
+    border-radius: 5px;
+    background-color: #ff8c38;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: hsl(25, 93%, 63%);
+}
+
+.hero {
+    padding: 2.6rem;
+}
+
+.text {
+    font: inter;
+    font-weight: 800;
+    font-size: 36px;
+    line-height: 42px;
+}
+
+.below {
+    width: auto;
+    height: 150px;
+}
+
+.body-text {
+    line-height: 24x;
+    font-weight: 500;
+    font-size: 16px;
+    gap: 2px;
+}
+
+p, h2, .btn {
+    color: #ffff;
+}
+
+.bottom {
+    background-color: #252525;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imgContainer {
+    background:  cover;
+    background-repeat: no-repeat;
+    height: 30vh;
+    width: 23.3rem;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+}
+
+.txt {
+    font: inter;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    color: #161616;
+}
+
+.sep {
+    background-color: #FFCC8D;
+    margin: 10px;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.txt-2 {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 30px;
+    color: #161616;
+}
+
+.blk-btn {
+    border-radius: 10px;
+    color: white;
+    background-color: #161616;
+    height: 49px;
+}
+
+.container {
+    width: auto;
+    height: fit-content;
+}
