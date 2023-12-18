@@ -57,34 +57,29 @@ export function Footer() {
 
 export const Abouts = () => {
     return (
-    <div className="container">
+<>
         <NavBar />
-    <div >
-        <img src={Image54} alt="" className="imgContainer" /> 
-    </div>
-    <section>
+        <div className="page-container">
+        <img src={Image54} alt=""  className="imgContainer"/> 
         <div className="hero">
         <h3>Don’t squeeze in a sedan when you could relax in a van.</h3>
-    <div className="">
         <p className='txt'>Our mission is to enliven your road trip with the perfect travel van rental. Our vans are recertified before each trip to ensure your travel plans can go off without a hitch.
 (Hitch costs extra 😉)
 
 Our team is full of vanlife enthusiasts who know firsthand the magic of touring the world on 4 wheels.</p>
     </div>
-    </div>
-    
-    </section>
     <div className="sep">
-        <p className='txt-2'>Your destination is waiting.
-Your van is ready.</p>
+        <h4 className='txt-2'>Your destination is waiting.
+Your van is ready.</h4>
         <div className="blk-cont">
         <button className='blk-btn'>
         Explore our vans
         </button>
         </div>
     </div>
-    <Footer />
     </div>
+    <Footer />
+    </>
     )
 }
 

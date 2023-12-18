@@ -108,13 +108,7 @@ p, h2, .btn {
 }
 
 .imgContainer {
-    background:  cover;
-    background-repeat: no-repeat;
-    height: 30vh;
-    width: 23.3rem;
-    display: flex;
-    justify-items: center;
-    align-items: center;
+    max-width: 100%;
 }
 
 .txt {
@@ -146,7 +140,10 @@ p, h2, .btn {
     height: 49px;
 }
 
-.container {
-    width: auto;
-    height: fit-content;
+.page-container {
+    padding-inline: 23px;
+    color: #161616;
+    margin-bottom: 55px;
+    padding-left: 0;
+    padding-right: 0;
 }
