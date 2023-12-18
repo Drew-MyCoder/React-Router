@@ -13,7 +13,6 @@ export const Home = () => {
     }
   return (
     <>
-    <NavBar />
     <section style={divStyle}>
             <div className="hero">
             <h2 className='text'>You got the travel plans, we got the travel vans.</h2>
@@ -36,9 +35,10 @@ export const Home = () => {
 export function NavBar () {
     return (
         <header>
-              <Link className='site-logo'>#VANLIFE</Link>
+              <Link className='site-logo' to='/'>#VANLIFE</Link>
           <nav className='nav-elements'>
               <Link to="/about">About</Link>
+              <Link to="/vans">Vans</Link>
           </nav>
       </header>
     )
@@ -58,7 +58,6 @@ export function Footer() {
 export const Abouts = () => {
     return (
 <>
-        <NavBar />
         <div className="page-container">
         <img src={Image54} alt=""  className="imgContainer"/> 
         <div className="hero">
@@ -82,4 +81,5 @@ Your van is ready.</h4>
     </>
     )
 }
+
 
