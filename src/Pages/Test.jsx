@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from "react-router-dom"
+import { NavLink, Link } from "react-router-dom"
 import Image from '../assets/bgImg.png'
 import Image54 from '../assets/image54.png'
 
@@ -9,7 +9,7 @@ export const Home = () => {
         backgroundImage: `url(${Image})`,
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
-        height: '80vh'
+        height: '90vh',
     }
   return (
     <>
@@ -26,19 +26,32 @@ export const Home = () => {
             </div>
             </div>
           </section>
-         <Footer />
          </>
   )
 }
 
 
 export function NavBar () {
+    const activeStyle = {
+        fontWeight: 'bold',
+        TextDecoderation: 'underline',
+        color: '#161616',
+    }
+    
     return (
         <header>
               <Link className='site-logo' to='/'>#VANLIFE</Link>
-          <nav className='nav-elements'>
-              <Link to="/about">About</Link>
-              <Link to="/vans">Vans</Link>
+          <nav>
+              <NavLink
+                style={({isActive}) => isActive ? activeStyle : null} 
+                to="/host">
+                Host</NavLink>
+              <NavLink
+                style={({isActive}) => isActive ? activeStyle : null}  
+                to="/about">About</NavLink>
+              <NavLink
+                style={({isActive}) => isActive ? activeStyle : null}  
+                to="/vans">Vans</NavLink>
           </nav>
       </header>
     )
@@ -46,18 +59,15 @@ export function NavBar () {
 
 export function Footer() {
     return (
-        <div className='bottom'>
         <footer > 
-              <Link to="/"><p>Ⓒ 2022 #VANLIFE</p></Link>
+        Ⓒ 2022 #VANLIFE
         </footer>
-        </div>
     )
 }
 
 
 export const Abouts = () => {
     return (
-<>
         <div className="page-container">
         <img src={Image54} alt=""  className="imgContainer"/> 
         <div className="hero">
@@ -77,8 +87,6 @@ Your van is ready.</h4>
         </div>
     </div>
     </div>
-    <Footer />
-    </>
     )
 }
 

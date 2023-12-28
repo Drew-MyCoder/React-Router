@@ -32,7 +32,6 @@ export const Vans = () => {
                 {vanElements}
             </div>
         </div>
-      <Footer />
       </>
     )
   }

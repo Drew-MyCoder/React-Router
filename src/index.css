@@ -19,7 +19,7 @@ body::-webkit-scrollbar {
   }
 
 header {
-    height: 110px;
+    height: 80px;
     display: flex;
     align-items: center;
     padding-block: 10px;
@@ -30,7 +30,7 @@ header .site-logo {
     margin-right: auto;
     text-transform: uppercase;
     font-weight: 900;
-    font-size: 25px;
+    font-size: 15px;
 }
 
 header a {
@@ -100,16 +100,22 @@ p, h2, .btn {
     color: #ffff;
 }
 
-.bottom {
-    background-color: #252525;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
 .imgContainer {
     max-width: 100%;
 }
+
+@media only screen and (min-width: 768px) {
+    .imgContainer {
+        height: auto;
+        width: 100%;
+    }
+
+    header .site-logo {
+        font-size: 55px;
+    }
+}
+
 
 .txt {
     font: inter;
@@ -283,4 +289,104 @@ i[class*='van-type-'] {
     color: white;
     font-size: 1.125rem;
     border-radius: 5px;
+}
+
+.host-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.host-nav a {
+    text-decoration: none;
+    color: #4D4D4D;
+    font-weight: 500;
+    padding: 5px 15px;
+}
+
+.host-nav a:hover {
+    color: #161616;
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+
+footer {
+    background-color: #161616;
+    color: #AAAAAA;
+    height: 74px;
+    display: flex;
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
+    margin-top: auto;
+    font-weight: 500;
+}
+
+.hostVan {
+    display: flex;
+    flex-direction: column;
+}
+
+.hVan {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    padding-bottom: 3.5rem;
+}
+
+.host-van-link-wrapper {
+    color: unset;
+    text-decoration: unset;
+    width: 100%;
+    margin-left: 10px;
+}
+
+.host-vans-list {
+    padding-inline: 26px;
+}
+
+.host-vans-title {
+    padding-inline: 26px;
+}
+
+.host-van-single {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    margin-bottom: 15px;
+    padding-block: 18px;
+    padding-left: 24px;
+}
+
+.host-van-single > img {
+    height: 70px;
+    border-radius: 5px;
+    margin-right: 17px;
+}
+
+.host-van-info h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-block: 10px;
+}
+
+.host-van-info p {
+    margin-block: 10px;
+}
+
+@media only screen and (min-width: 768px) {
+    .hVan {
+        padding-bottom: 7rem;
+    }
+
+    .host-van-link-wrapper {
+        width: 250%;
+        padding-bottom: 20px;
+    }
+
+    .host-nav {
+        width: auto;
+    }
 }
