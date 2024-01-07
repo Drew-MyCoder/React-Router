@@ -160,6 +160,17 @@ p, h2, .btn {
     padding-bottom: 3rem;
 }
 
+.van-list-filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.van-list-filter-buttons > a {
+    margin-right: 15px;
+    text-decoration: none;
+}
+
 .van-list {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -477,4 +488,43 @@ footer {
 .host-van-price > span {
     font-size: 16px;
     color: #4D4D4D;
+}
+
+.not-found-container {
+    padding-inline: 26px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 47vh;
+}
+
+.not-found-container .link-button {
+    width: 100%;
+    background-color: #161616;
+    color: white;
+}
+
+.not-found-container a {
+    padding: 8px;
+    text-decoration: none;
+    margin-top: 3rem;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+@media only screen and (min-width: 768px) {
+    .not-found-container {
+        margin-bottom: 60vh;
+    }
+
+    .not-found-container .link-button {
+        width: 30rem;
+        height: 3rem;
+    }
+
+    .not-found-container a {
+        display: flex;
+        align-items: center;
+        border-radius: 10px;
+    }
 }
