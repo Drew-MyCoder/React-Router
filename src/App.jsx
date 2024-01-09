@@ -4,7 +4,6 @@ import { createBrowserRouter,
           createRoutesFromElements,
           Route, 
           RouterProvider} from "react-router-dom"
-import "../src/Pages/Server"
 import { Vans, loader as vansLoader } from './Pages/Vans'
 import { VanDetail, loader as VanDetailLoader } from './Pages/vanDetail'
 import { Layout } from './Components/Layout'
@@ -19,29 +18,34 @@ import { HostVanPricing } from './Pages/Host/HostVanPricing'
 import { HostVanPhotos } from './Pages/Host/HostVanPhotos'
 import { NotFound } from './Pages/notFound'
 import { Error } from './Components/Error'
-import Login from './Pages/login'
+import Login, { loader as loginLoader, action as loginAction} from './Pages/login'
 import { requiredAuth } from '../utils'
+localStorage.removeItem("Loggedin")
+import "../src/Pages/Server"
 
 
 
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-      <Route path='/' element={<Layout />} errorElement={<Error />}>
+      <Route path='/' element={<Layout />} >
         <Route index element={<Home />} />
         <Route path="about" element={<Abouts />} />
         <Route
           path="login"
           element={<Login />}
+          loader={loginLoader}
+          action={loginAction}
         />
         <Route path="vans" element={<Vans />} 
                loader={vansLoader}
+               errorElement={<Error />}
                 />
         <Route path="vans/:id" element={<VanDetail />}
                loader={VanDetailLoader} />
 
         <Route path="host" element={<HostLayout  />}>
-         <Route index element={<Dashboard />} loader={async () => {await requiredAuth
+         <Route index element={<Dashboard />} loader={async () => {await requiredAuth()
           return null}} />
           <Route path="income" loader={async () => {await requiredAuth()
           return null}} element={<Income />} />
