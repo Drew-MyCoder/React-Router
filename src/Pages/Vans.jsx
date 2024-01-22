@@ -1,32 +1,39 @@
 import { useEffect, useState } from "react"
-import { Link, useSearchParams } from "react-router-dom"
+import { Link, useLoaderData, useSearchParams } from "react-router-dom"
 import { getVans } from "../../api"
 
 
+export function loader() {
+    return getVans()
+} 
+
 export const Vans = () => {
     const [searchParams, setSearchParams] = useSearchParams()
-    const [vans, setVans] = useState([])
-    const [loading, setLoading] = useState(false)
+    // const [vans, setVans] = useState([])
+    // const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
+    const vans = useLoaderData()
+    // console.log(data)
 
     const typeFilter = searchParams.get("type")
 
+    // no longer using useEfect because im now
+    // using useLoader
+    // useEffect(() => {
+    //     async function loadVans() {
+    //         setLoading(true)
+    //         try {
+    //             const data = await getVans()
+    //             setVans(data)
+    //         } catch(err) {
+    //             setError(err)
+    //         } finally {
+    //             setLoading(false)
+    //         }
+    //     }
 
-    useEffect(() => {
-        async function loadVans() {
-            setLoading(true)
-            try {
-                const data = await getVans()
-                setVans(data)
-            } catch(err) {
-                setError(err)
-            } finally {
-                setLoading(false)
-            }
-        }
-
-        loadVans()
-    }, [])
+    //     loadVans()
+    // }, [])
 
     // we are applying the filter 
     // based on van type
@@ -60,9 +67,9 @@ export const Vans = () => {
         })
     }
 
-    if (loading) {
-        return <h1>Loading</h1>
-    }
+    // if (loading) {
+    //     return <h1>Loading</h1>
+    // }
 
     if (error) {
         return <h1>There was an error: {error.message}</h1>

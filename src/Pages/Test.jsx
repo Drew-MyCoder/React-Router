@@ -2,6 +2,7 @@ import React from 'react'
 import { NavLink, Link } from "react-router-dom"
 import Image from '../assets/bgImg.png'
 import Image54 from '../assets/image54.png'
+import Avatar from "../assets/avatar-icon.png"
 
 export const Home = () => {
 
@@ -52,6 +53,12 @@ export function NavBar () {
               <NavLink
                 style={({isActive}) => isActive ? activeStyle : null}  
                 to="/vans">Vans</NavLink>
+                <Link to="login" className="login-link">
+                    <img 
+                        src={Avatar}
+                        className="login-icon"
+                    />
+                </Link>
           </nav>
       </header>
     )
