@@ -1,24 +1,32 @@
 import { useEffect, useState } from 'react'
-import { useParams, Link, useLocation } from 'react-router-dom'
+import { useParams, Link, useLocation, useLoaderData } from 'react-router-dom'
+import { getVans } from '../../api'
+
+
+export function loader({ params }) {
+    return getVans(params.id)
+}
 
 export const VanDetail = () => {
-    const params = useParams()
+    // const params = useParams()
     const location = useLocation()
-    console.log(location)
+    const van = useLoaderData()
+    
+ 
 
-    const [van, setVan] = useState(null)
+    // const [van, setVan] = useState(null)
 
-    useEffect(() => {
-        fetch(`/api/vans/${params.id}`)
-            .then(res => res.json())
-            .then(data => setVan(data.vans))
-    }, [params.id])
+    // useEffect(() => {
+    //     fetch(`/api/vans/${params.id}`)
+    //         .then(res => res.json())
+    //         .then(data => setVan(data.vans))
+    // }, [params.id])
 
     // if location.state is a thing, give the search property
     // otherwise an empty string
     // this is optional chaining
-    const search = location.state?.search || ""
-    const type = location.state?.type || "all"
+    const search = location.state?.search || "";
+    const type = location.state?.type || "all"; 
 
   return (
     <div className="van-detail-container">
@@ -30,7 +38,7 @@ export const VanDetail = () => {
         className="back-button"
     >&larr; <span>Back to {type} vans</span></Link>
 
-            {van ? (
+            
                 <div className="van-detail">
                     <img src={van.imageUrl} />
                     <i className={`van-type ${van.type} selected`}>{van.type}</i>
@@ -39,7 +47,7 @@ export const VanDetail = () => {
                     <p className='txt'>{van.description}</p>
                     <button className="link-button">Rent this van</button>
                 </div>
-            ) : <h2 className='txt'>Loading...</h2>}
+            
         </div>
     )
 }
