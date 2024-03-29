@@ -1,13 +1,13 @@
-import { useState, useEffect } from 'react'
-import { useParams, Link, Outlet, NavLink, useLoaderData } from 'react-router-dom'
+import { Suspense,useState, useEffect } from 'react'
+import { useParams, Link, Outlet, NavLink, useLoaderData, defer, Await } from 'react-router-dom'
 import { getHostVans, getVans } from '../../../api'
 import { requiredAuth } from '../../../utils'
 
 
 
 
-export async function loader ({ params }) {
-  await requiredAuth
+export async function loader ({ params, request }) {
+  await requiredAuth(request)
   return getHostVans(params.id)
 }
 
@@ -15,7 +15,8 @@ export async function loader ({ params }) {
 export const HostVanDetail = () => {
   // const params = useParams()
   // const [currentVan, setCurrentvan] = useState(null)
-  const currentVan = useLoaderData()
+   const currentVan = useLoaderData()
+  // const dataPromi = useLoaderData()
 
 //   useEffect(() => {
 //     fetch(`/api/host/vans/${params.id}`)
@@ -31,6 +32,7 @@ export const HostVanDetail = () => {
   }
 
 
+
   return (
     <section className='hostVan'> 
     <Link
@@ -40,7 +42,7 @@ export const HostVanDetail = () => {
         relative='path'
         className="back-button"
     >&larr; <span>Back to all vans</span></Link>
-
+    
     <div className="host-van-detail-layout-container">
         <div className="host-van-detail">
             <img src={currentVan.imageUrl} />
@@ -76,6 +78,9 @@ export const HostVanDetail = () => {
 
         <Outlet context={{ currentVan }}/>
     </div>
+   
+         
+    
 </section>
 )
 }

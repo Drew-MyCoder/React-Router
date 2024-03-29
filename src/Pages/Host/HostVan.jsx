@@ -1,23 +1,26 @@
-import { Link, useLoaderData } from "react-router-dom"
-import { useState, useEffect } from "react"
+import { Link, useLoaderData, defer, Await } from "react-router-dom"
+import { Suspense,useState, useEffect } from "react"
 import { getHostVans } from "../../../api"
 import { requiredAuth } from '../../../utils'
 
 
-export async function loader() {
-    await requiredAuth()
-    return getHostVans()
+export async function loader({ request }) {
+    await requiredAuth(request)
+    return defer ({ vans: getHostVans() })
 }
 
 export const HostVan = () => {
 //   const [vans, setVans] = useState([])
-  const vans = useLoaderData( )
+//   const vans = useLoaderData( )
+const dataProm = useLoaderData()
 
 //   useEffect(() => {
 //         fetch("/api/host/vans")
 //             .then(res => res.json())
 //             .then(data => setVans(data.vans))
 //     }, [])
+
+function renderVanElements(vans) {
 
     const hostVansEls = vans.map(van => (
       <Link
@@ -33,16 +36,27 @@ export const HostVan = () => {
               </div>
           </div>
       </Link>
-  ))
+    ))
+    return (
 
-  return (
-    <section className="hostVan">
-    <h1 className="host-vans-title">Your listed vans</h1>
     <div className="host-vans-list">
                 <section className="hVan">
                     {hostVansEls}
                 </section>
     </div>
+    )
+}
+
+
+return (
+    <section className="hostVan">
+    <h1 className="host-vans-title">Your listed vans</h1>
+    <Suspense fallback={<h2>Loading your listed vans...</h2>}>
+        <Await resolve={dataProm.vans}>
+            {renderVanElements}
+
+        </Await>
+    </Suspense>
 </section>
   )
 }

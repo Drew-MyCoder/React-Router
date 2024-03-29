@@ -45,19 +45,19 @@ const router = createBrowserRouter(
                loader={VanDetailLoader} />
 
         <Route path="host" element={<HostLayout  />}>
-         <Route index element={<Dashboard />} loader={async () => {await requiredAuth()
+         <Route index element={<Dashboard />} loader={async ({ request }) => {await requiredAuth(request)
           return null}} />
-          <Route path="income" loader={async () => {await requiredAuth()
+          <Route path="income" loader={async ({ request }) => {await requiredAuth(request)
           return null}} element={<Income />} />
-          <Route path="reviews" loader={async () => {await requiredAuth()
-          return null}} element={<Reviews />} />
-          <Route path="vans" loader={hostVansLoader} element={<HostVan />} />
-          <Route path="vans/:id" loader={HostVanDetailLoader} element={<HostVanDetail />}>
-            <Route index loader={async () => {await requiredAuth()
+          <Route path="reviews" loader={async ({ request }) => {await requiredAuth(request)
+         return null }} element={<Reviews />} />
+          <Route path="vans" loader={hostVansLoader} element={<HostVan />} errorElement={<Error />} />
+          <Route path="vans/:id" loader={HostVanDetailLoader} element={<HostVanDetail />} errorElement={<Error />} >
+            <Route index loader={async ({ request }) => {await requiredAuth(request)
           return null}} element={<HostVanInfo />} />
-            <Route path='pricing' loader={async () => {await requiredAuth()
+            <Route path='pricing' loader={async ({ request }) => {await requiredAuth(request)
           return null}} element={<HostVanPricing />} />
-            <Route path='photos' loader={async () => {await requiredAuth()
+            <Route path='photos' loader={async ({ request }) => {await requiredAuth(request)
           return null}} element={<HostVanPhotos />} />
           </Route>
         </Route> 

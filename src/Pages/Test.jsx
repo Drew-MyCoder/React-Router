@@ -38,6 +38,10 @@ export function NavBar () {
         TextDecoderation: 'underline',
         color: '#161616',
     }
+
+    function fakeLogOut() {
+        localStorage.removeItem("loggedin")
+    }
     
     return (
         <header>
@@ -53,12 +57,13 @@ export function NavBar () {
               <NavLink
                 style={({isActive}) => isActive ? activeStyle : null}  
                 to="/vans">Vans</NavLink>
-                <Link to="login" className="login-link">
+                <NavLink to="/login" className="login-link">
                     <img 
                         src={Avatar}
                         className="login-icon"
                     />
-                </Link>
+                </NavLink>
+                <button onClick={fakeLogOut}>X</button>
           </nav>
       </header>
     )

@@ -1,19 +1,21 @@
-import { useEffect, useState } from "react"
-import { Link, useLoaderData, useSearchParams } from "react-router-dom"
+import { Suspense, useEffect, useState } from "react"
+import { Link, useLoaderData, useSearchParams, defer, Await } from "react-router-dom"
 import { getVans } from "../../api"
 
 
 export function loader() {
-    return getVans()
+    return defer({ vans: getVans() })
 } 
 
 export const Vans = () => {
     const [searchParams, setSearchParams] = useSearchParams()
     // const [vans, setVans] = useState([])
     // const [loading, setLoading] = useState(false)
-    const [error, setError] = useState(null)
-    const vans = useLoaderData()
+    // const [error, setError] = useState(null)
+    // const vans = useLoaderData()
     // console.log(data)
+    const dataPromise = useLoaderData()
+
 
     const typeFilter = searchParams.get("type")
 
@@ -37,23 +39,7 @@ export const Vans = () => {
 
     // we are applying the filter 
     // based on van type
-    const displayedType = typeFilter
-        ? vans.filter(van => van.type === typeFilter)
-        : vans
     
-    const vanElements = displayedType.map(van => (
-        <div key={van.id} className="van-tile">
-            <Link to={van.id} state={{ search: `?${searchParams.toString()}` ,
-                    type: typeFilter }}>
-            <img src={van.imageUrl} />
-            <div className="van-info">
-                <h3>{van.name}</h3>
-                <p className="txt">${van.price}<span>/day</span></p>
-            </div>
-            <i className={`van-type ${van.type} selected`}>{van.type}</i>
-            </Link>
-        </div>
-    ))
 
     // changing the hard coded setSearchParams
     function handleFilterChange(key, value) {
@@ -71,9 +57,9 @@ export const Vans = () => {
     //     return <h1>Loading</h1>
     // }
 
-    if (error) {
-        return <h1>There was an error: {error.message}</h1>
-    }
+    // if (error) {
+    //     return <h1>There was an error: {error.message}</h1>
+    // }
 
     // this is another way of using the searchparams to filter 
     // <Link to='?type=simple' className="van-type simple">Simple</Link>
@@ -81,11 +67,34 @@ export const Vans = () => {
     //         <Link to='?type=rugged' className="van-type rugged">Rugged</Link>
     //         <Link to='.' className="van-type clear-filters">Clear</Link>
 
+
+
     return (
       <>
       <div className="van-list-container">
         <h1>Explore Our Van Options</h1>
-        <div className="van-list-filter-buttons">
+        <Suspense fallback={<h2 className="txt">Loading vans...</h2>}>
+        <Await resolve={dataPromise.vans}>
+            {vans => {
+                const displayedType = typeFilter
+                ? vans.filter(van => van.type === typeFilter)
+                : vans
+            
+            const vanElements = displayedType.map(van => (
+                <div key={van.id} className="van-tile">
+                    <Link to={van.id} state={{ search: `?${searchParams.toString()}` ,
+                            type: typeFilter }}>
+                    <img src={van.imageUrl} />
+                    <div className="van-info">
+                        <h3>{van.name}</h3>
+                        <p className="txt">${van.price}<span>/day</span></p>
+                    </div>
+                    <i className={`van-type ${van.type} selected`}>{van.type}</i>
+                    </Link>
+                </div>
+            ))
+            return (<>
+                <div className="van-list-filter-buttons">
             <button onClick={() => handleFilterChange('type', 'simple')} className={`van-type simple ${typeFilter === "simple" ? "selected" : ""}`}>Simple</button>
             <button onClick={() => handleFilterChange('type', 'luxury')} className={`van-type luxury ${typeFilter === "luxury" ? "selected" : ""}`}>Luxury</button>
             <button onClick={() => handleFilterChange('type', 'rugged')}  className={`van-type rugged ${typeFilter === "rugged" ? "selected" : ""}`}>Rugged</button>
@@ -96,7 +105,12 @@ export const Vans = () => {
         </div>
             <div className="van-list">
                 {vanElements}
-            </div>
+            </div></>
+            )
+            }}
+        
+            </Await>
+            </Suspense>
         </div>
       </>
     )
